@@ -30,21 +30,21 @@ module axi_stream_insert_header_v1#(
 		
 		//axi input orginal data
 		input 						valid_in,
-		input [DATA_WD-1:0] 		data_in,
-		input [DATA_BYTE_WD-1:0] 	keep_in,
+		input [DATA_WD-1:0] 				data_in,
+		input [DATA_BYTE_WD-1:0] 			keep_in,
 		input 						las_in,
 		output 						ready_in,       //control r6
 		//axi  output with header inseted
 		output						valid_out,    	//control r1
-		output [DATA_WD-1:0] 		data_out,		//control r2
-		output [DATA_BYTE_WD-1:0] 	keep_out,		//control r3	
+		output [DATA_WD-1:0] 				data_out,		//control r2
+		output [DATA_BYTE_WD-1:0] 			keep_out,		//control r3	
 		output						last_out,		//control r4
 		input						ready_out,		
 		//header input to be inserted to axi stream
 		input 						valid_insert,
-		input [DATA_WD-1:0]			data_insert,
-		input [DATA_BYTE_WD-1:0]	keep_insert,
-		input [BYTE_CNT_WD:0]		byte_insert_cnt,
+		input [DATA_WD-1:0]				data_insert,
+		input [DATA_BYTE_WD-1:0]			keep_insert,
+		input [BYTE_CNT_WD:0]				byte_insert_cnt,
 		output						ready_insert	//control r5
 	);
 	/*********************register*****************************/
@@ -56,10 +56,10 @@ module axi_stream_insert_header_v1#(
 	reg						r_ready_insert;
 	
 	/*------------ data_out output------------*/	
-	reg [DATA_WD-1:0] 		r_data_out;
+	reg [DATA_WD-1:0] 				r_data_out;
 	reg [DATA_BYTE_WD-1:0] 	r_keep_out;
 	reg						r_last_out;		
-    reg 					r_valid_out;
+   	reg 						r_valid_out;
 
 	
 
@@ -70,16 +70,16 @@ module axi_stream_insert_header_v1#(
 
 
                     
-    reg  						las_in_delay_1;
+    	reg  					las_in_delay_1;
 	reg [DATA_WD-1:0]			data_in_delay_1;   
-	reg [DATA_BYTE_WD-1:0]  	keep_in_delay_1;  	
-	reg  						las_in_delay;
+	reg [DATA_BYTE_WD-1:0]  		keep_in_delay_1;  	
+	reg  					las_in_delay;
 	reg [DATA_WD-1:0]			data_in_delay;   //data_in from the former circle
-	reg [DATA_BYTE_WD-1:0]  	keep_in_delay;  //which will be used in compensatory burst
+	reg [DATA_BYTE_WD-1:0]  		keep_in_delay;  //which will be used in compensatory burst
 
-	reg      					count;          //a flag of the first transfer of data'1'
-	reg                   		compens;     // a flag of the compensatory transfer
-	reg	[BYTE_CNT_WD:0]			byte_in_cnt;
+	reg      				count;          //a flag of the first transfer of data'1'
+	reg                   			compens;     // a flag of the compensatory transfer
+	reg[BYTE_CNT_WD:0]			byte_in_cnt;
 	reg [BYTE_CNT_WD:0]			byte_insert_cnt_temp;
 	reg [BYTE_CNT_WD:0]			r_byte_insert_cnt;
 	/****************************connection******************************/
